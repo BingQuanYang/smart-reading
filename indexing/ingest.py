@@ -22,7 +22,8 @@ class PdfIngestor:
             # 文档加载
             documents = self._load(temp_path)
             # 拆分
-            return self._split(documents)
+            chunks = self._split(documents)
+            return chunks
         finally:
             os.unlink(temp_path)
 

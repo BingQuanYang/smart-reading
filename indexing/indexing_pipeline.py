@@ -19,7 +19,7 @@ class IndexingPipeline:
     def build_from_bytes(self, pdf_bytes, dashscope_api_key: str) -> str:
         # 1.存储临时文件 计算hash,并存储
         file_hash = self.store.compute_hash(pdf_bytes)
-        file_path = self.store.store(pdf_bytes, file_hash)
+        self.store.store(pdf_bytes, file_hash)
         # 2. 加载 & 切分文档
         chunks = self.ingest.ingest(pdf_bytes)
         # 3.构建 / 加载向量库 (传入 chunks 会新建)
@@ -28,6 +28,17 @@ class IndexingPipeline:
             dashscope_api_key=dashscope_api_key
         )
         vector_store = VectorStoreManage(self.config, embeddings)
-        #存储chunks
+        # 存储chunks
         vector_store.load_or_build(file_hash, chunks=chunks)
-        return file_path
+        return file_hash
+
+    def build_from_file(self, pdf_path: str, dashscope_api_key: str) -> str:
+        """
+        从文件路劲构建索引
+        :param pdf_path:
+        :param dashscope_api_key:
+        :return:
+        """
+        with open(pdf_path, "rb") as f:
+            pdf_bytes = f.read()
+        return self.build_from_bytes(pdf_bytes, dashscope_api_key)
