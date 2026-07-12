@@ -8,13 +8,13 @@ from langchain_core.documents import Document
 from config.setting import QaConfig
 
 
-class VectorStoreManage:
+class VectorStoreManager:
 
     def __init__(self, config: QaConfig, embeddings: DashScopeEmbeddings):
         self.__config = config
         self.__embeddings = embeddings
 
-    def load_or_build(self, file_hash: str, chunks: List[Document] = None):
+    def load_or_build(self, file_hash: str, chunks: List[Document] = None) -> Chroma:
         """
         加载或者构建向量数据库
         :param file_hash: PDF哈希文件名称
