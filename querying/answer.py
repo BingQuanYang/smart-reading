@@ -12,7 +12,7 @@ from querying.query_prompt import READING_HELPER_PROMPT
 class AnswerGenerator:
     """查询改写器：把用户问题改写成可独立检索的查询"""
 
-    def __int__(self, llm: ChatTongyi):
+    def __init__(self, llm: ChatTongyi)->None:
         """
                初始化生成器，预编译 prompt 链
                :param llm: 已配置好通义千问 LLM 实例

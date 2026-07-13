@@ -7,7 +7,7 @@ from langchain_community.embeddings import DashScopeEmbeddings
 from config.setting import QaConfig
 from indexing.storeage import PdfBytesStore
 from indexing.ingest import PdfIngestor
-from indexing.vectorstorage import VectorStoreManage
+from indexing.vectorstorage import VectorStoreManager
 
 
 class IndexingPipeline:
@@ -27,7 +27,7 @@ class IndexingPipeline:
             model=self.config.embedding_model,
             dashscope_api_key=dashscope_api_key
         )
-        vector_store = VectorStoreManage(self.config, embeddings)
+        vector_store = VectorStoreManager(self.config, embeddings)
         # 存储chunks
         vector_store.load_or_build(file_hash, chunks=chunks)
         return file_hash

@@ -64,7 +64,7 @@ class RerankPipeline:
                 source=meta.get("source", "Unknown"),
                 page=meta.get("page", 0),
                 score=llm_scores[i],
-                vec_scores=score_map.get(content),
+                vector_score=score_map.get(content),
                 hybrid_score=hybrid_score,
                 llm_score=llm_scores[i]
             )

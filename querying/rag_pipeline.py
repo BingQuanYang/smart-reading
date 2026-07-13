@@ -1,7 +1,7 @@
 from typing import List, Dict, Any
 from langchain_community.chat_models import ChatTongyi
 from langchain_community.embeddings import DashScopeEmbeddings
-from langchain_core.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
 
 from config.setting import QaConfig
 from indexing.vectorstorage import VectorStoreManager
